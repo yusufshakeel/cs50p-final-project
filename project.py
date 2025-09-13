@@ -9,6 +9,7 @@ MIN_NUMBER_OF_COUPON_CHARACTERS = 4
 MAX_NUMBER_OF_COUPON_CHARACTERS = 16
 DEFAULT_NUMBER_OF_COUPON_CHARACTERS = 5
 CHARACTER_SET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+OUTPUT_FILENAME = "coupons.txt"
 
 
 def main():
@@ -26,7 +27,17 @@ def main():
         help=f"Number of characters in a coupon. [Min: {MIN_NUMBER_OF_COUPON_CHARACTERS}, Max: {MAX_NUMBER_OF_COUPON_CHARACTERS}, Default: {DEFAULT_NUMBER_OF_COUPON_CHARACTERS}]",
     )
     args = parser.parse_args()
-    print(args)
+
+    number_of_coupons = args.n
+    number_of_chars_in_a_coupon = args.l
+
+    validate(number_of_coupons, number_of_chars_in_a_coupon)
+
+    coupons = generate(number_of_coupons, number_of_chars_in_a_coupon)
+
+    save(coupons)
+
+    print(f"💾 Saved {number_of_coupons} coupon(s) in file {OUTPUT_FILENAME}")
 
 
 def validate(number_of_coupons: int, number_of_chars_in_a_coupon: int) -> None:
@@ -54,7 +65,7 @@ def generate(number_of_coupons: int, number_of_chars_in_a_coupon: int) -> List[s
 
 
 def save(coupons: List[str]):
-    with open("./coupons.txt", "w") as f:
+    with open(f"./{OUTPUT_FILENAME}", "w") as f:
         for coupon in coupons:
             f.write(f"{coupon}\n")
 
