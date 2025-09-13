@@ -5,9 +5,9 @@ import random
 MIN_NUMBER_OF_COUPONS = 1
 MAX_NUMBER_OF_COUPONS = 10000
 DEFAULT_NUMBER_OF_COUPONS = 1
-MIN_NUMBER_OF_COUPON_CHARACTERS = 4
-MAX_NUMBER_OF_COUPON_CHARACTERS = 16
-DEFAULT_NUMBER_OF_COUPON_CHARACTERS = 5
+MIN_LENGTH_OF_COUPON = 4
+MAX_LENGTH_OF_COUPON = 16
+DEFAULT_LENGTH_OF_COUPON = 5
 CHARACTER_SET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 OUTPUT_FILENAME = "coupons.txt"
 
@@ -17,18 +17,24 @@ def main():
         parser = argparse.ArgumentParser()
         parser.add_argument(
             "-n",
+            "--number_of_coupons",
+            dest="n",
             type=int,
             default=DEFAULT_NUMBER_OF_COUPONS,
             help=f"Number of coupons to generate. [Min: {MIN_NUMBER_OF_COUPONS}, Max: {MAX_NUMBER_OF_COUPONS}, Default: {DEFAULT_NUMBER_OF_COUPONS}]",
         )
         parser.add_argument(
             "-l",
+            "--length_of_coupon",
+            dest="l",
             type=int,
-            default=DEFAULT_NUMBER_OF_COUPON_CHARACTERS,
-            help=f"Number of characters in a coupon. [Min: {MIN_NUMBER_OF_COUPON_CHARACTERS}, Max: {MAX_NUMBER_OF_COUPON_CHARACTERS}, Default: {DEFAULT_NUMBER_OF_COUPON_CHARACTERS}]",
+            default=DEFAULT_LENGTH_OF_COUPON,
+            help=f"Length of coupon. [Min: {MIN_LENGTH_OF_COUPON}, Max: {MAX_LENGTH_OF_COUPON}, Default: {DEFAULT_LENGTH_OF_COUPON}]",
         )
         parser.add_argument(
+            "-s",
             "--save",
+            dest="s",
             action="store_true",
             help=f"Save the coupons in file {OUTPUT_FILENAME}",
         )
@@ -41,7 +47,7 @@ def main():
 
         coupons = generate(number_of_coupons, number_of_chars_in_a_coupon)
 
-        if args.save:
+        if args.s:
             save(coupons)
             print(f"💾 Saved {number_of_coupons} coupon(s) in file {OUTPUT_FILENAME}")
         else:
@@ -57,10 +63,10 @@ def validate(number_of_coupons: int, number_of_chars_in_a_coupon: int) -> None:
     elif number_of_coupons < MIN_NUMBER_OF_COUPONS:
         raise ValueError(f"n cannot be less than {MIN_NUMBER_OF_COUPONS}")
 
-    if number_of_chars_in_a_coupon > MAX_NUMBER_OF_COUPON_CHARACTERS:
-        raise ValueError(f"l cannot be greater than {MAX_NUMBER_OF_COUPON_CHARACTERS}")
-    elif number_of_chars_in_a_coupon < MIN_NUMBER_OF_COUPON_CHARACTERS:
-        raise ValueError(f"l cannot be less than {MIN_NUMBER_OF_COUPON_CHARACTERS}")
+    if number_of_chars_in_a_coupon > MAX_LENGTH_OF_COUPON:
+        raise ValueError(f"l cannot be greater than {MAX_LENGTH_OF_COUPON}")
+    elif number_of_chars_in_a_coupon < MIN_LENGTH_OF_COUPON:
+        raise ValueError(f"l cannot be less than {MIN_LENGTH_OF_COUPON}")
 
 
 def generate(number_of_coupons: int, number_of_chars_in_a_coupon: int) -> Set[str]:
