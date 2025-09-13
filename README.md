@@ -13,7 +13,7 @@ It can generate 1 million coupons per execution and it is configurable.
 * Python >= 3.11
 * Git
 
-#### Getting started
+#### Getting Started
 
 * Clone the repository
 ```shell
@@ -42,16 +42,29 @@ This program uses the following characters `A-Z` and `0-9` to generate coupons.
 #### Options
 
 * -n N, --number_of_coupons N
-```
-Number of coupons to generate. [Min: 1, Max: 1000000, Default: 1]
-```
+  * Number of coupons to generate.
+  * Optional: True
+  * Default: 1
+  * Min: 1
+  * Max: 1000000
 
 * -l L, --length_of_coupon L
-```
-Length of coupon. [Min: 4, Max: 16, Default: 5]
-```
+  * Length of coupon.
+  * Optional: True
+  * Default: 5
+  * Min: 4
+  * Max: 16
 
-* -s, --save
-```
-Save the coupons in file ./output/coupons.txt
-```
+* -p P, --prefix P
+  * Prefix for the coupons.
+  * Optional: True
+  * Allowed Prefix Characters: A-Z0-9
+  * Example: CS50
+
+* -s S, --save S
+  * Save the coupons in the provided filename.
+  * Optional: True
+  * Allowed Filename Characters: a-zA-Z0-9-_
+  * Allowed File Extension: txt|csv
+  * Example: coupons.txt
+
