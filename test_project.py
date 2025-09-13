@@ -37,7 +37,8 @@ def test_validate_should_raise_ValueError_when_l_is_greater_than_16():
 def test_generate():
     coupons = generate(1, 5)
     assert len(coupons) == 1
-    assert coupons[0].isalnum() == True
+    for coupon in coupons:
+        assert coupon.isalnum() == True
 
 
 def test_generate_n_coupons_have_l_characters():
