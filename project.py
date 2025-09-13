@@ -90,27 +90,27 @@ def validate(
     filename: str = "",
 ) -> None:
     if number_of_coupons > MAX_NUMBER_OF_COUPONS:
-        raise ValueError(f"n cannot be greater than {MAX_NUMBER_OF_COUPONS}")
+        raise ValueError(f"-n cannot be greater than {MAX_NUMBER_OF_COUPONS}")
     elif number_of_coupons < MIN_NUMBER_OF_COUPONS:
-        raise ValueError(f"n cannot be less than {MIN_NUMBER_OF_COUPONS}")
+        raise ValueError(f"-n cannot be less than {MIN_NUMBER_OF_COUPONS}")
 
     if length_of_coupon > MAX_LENGTH_OF_COUPON:
-        raise ValueError(f"l cannot be greater than {MAX_LENGTH_OF_COUPON}")
+        raise ValueError(f"-l cannot be greater than {MAX_LENGTH_OF_COUPON}")
     elif length_of_coupon < MIN_LENGTH_OF_COUPON:
-        raise ValueError(f"l cannot be less than {MIN_LENGTH_OF_COUPON}")
+        raise ValueError(f"-l cannot be less than {MIN_LENGTH_OF_COUPON}")
 
     length_of_prefix = len(prefix)
     if length_of_prefix:
         if length_of_prefix > MAX_LENGTH_OF_PREFIX:
             raise ValueError(
-                f"p cannot have more than {MAX_LENGTH_OF_PREFIX} character(s)"
+                f"-p cannot have more than {MAX_LENGTH_OF_PREFIX} character(s)"
             )
 
         pattern = f"^{ALLOWED_CHARACTERS_FOR_PREFIX}+$"
         found = re.search(pattern, prefix)
         if found is None:
             raise ValueError(
-                f"p must only use the following characters {ALLOWED_CHARACTERS_FOR_PREFIX}"
+                f"-p must only use the following characters {ALLOWED_CHARACTERS_FOR_PREFIX}"
             )
 
     if len(filename):
@@ -118,7 +118,7 @@ def validate(
         found = re.search(pattern, filename)
         if found is None:
             raise ValueError(
-                f"s must only use the following characters {ALLOWED_CHARACTERS_FOR_FILENAME} and file extension {ALLOWED_FILE_EXTENSION_FOR_FILENAME}"
+                f"-s must only use the following characters {ALLOWED_CHARACTERS_FOR_FILENAME} and file extension {ALLOWED_FILE_EXTENSION_FOR_FILENAME}"
             )
 
 
