@@ -95,7 +95,7 @@ def test_generate_n_coupons_have_l_characters_with_prefix():
 
 def test_save():
     coupons = ["CS50X", "CS50P"]
-    save(coupons)
+    save(coupons, "./output/coupons.txt")
     with open("./output/coupons.txt", "r") as f:
         for i, coupon in enumerate(f):
             assert coupon.strip() == coupons[i]

@@ -136,7 +136,7 @@ def generate(
     return coupons
 
 
-def save(coupons: List[str], filepath: str = OUTPUT_FILE_PATH):
+def save(coupons: List[str], filepath: str):
     with open(filepath, "w") as f:
         for coupon in coupons:
             f.write(f"{coupon}\n")
