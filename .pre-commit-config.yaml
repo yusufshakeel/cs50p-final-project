@@ -11,3 +11,12 @@ repos:
     hooks:
       - id: mypy
         additional_dependencies: []
+
+  # Pytest: run tests
+  - repo: local
+    hooks:
+      - id: pytest
+        name: pytest
+        entry: pytest
+        language: system
+        pass_filenames: false
