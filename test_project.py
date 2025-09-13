@@ -13,11 +13,11 @@ def test_validate_should_raise_ValueError_when_n_is_less_than_1():
     assert str(e.value) == "n cannot be less than 1"
 
 
-def test_validate_should_raise_ValueError_when_n_is_greater_than_10000():
+def test_validate_should_raise_ValueError_when_n_is_greater_than_1000000():
     with pytest.raises(ValueError) as e:
-        validate(100000, 10)
+        validate(10000000, 10)
 
-    assert str(e.value) == "n cannot be greater than 10000"
+    assert str(e.value) == "n cannot be greater than 1000000"
 
 
 def test_validate_should_raise_ValueError_when_l_is_less_than_4():

@@ -3,7 +3,7 @@ from typing import List, Set
 import random
 
 MIN_NUMBER_OF_COUPONS = 1
-MAX_NUMBER_OF_COUPONS = 10000
+MAX_NUMBER_OF_COUPONS = 1000000
 DEFAULT_NUMBER_OF_COUPONS = 1
 MIN_LENGTH_OF_COUPON = 4
 MAX_LENGTH_OF_COUPON = 16
@@ -49,7 +49,7 @@ def main():
 
         if args.s:
             save(coupons)
-            print(f"💾 Saved {number_of_coupons} coupon(s) in file {OUTPUT_FILENAME}")
+            print(f"💾 Saved {number_of_coupons:,} coupon(s) in file {OUTPUT_FILENAME}")
         else:
             for coupon in coupons:
                 print(coupon)
