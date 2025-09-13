@@ -53,7 +53,10 @@ def generate(number_of_coupons: int, number_of_chars_in_a_coupon: int) -> List[s
     return coupons
 
 
-def save(): ...
+def save(coupons: List[str]):
+    with open("./coupons.txt", "w") as f:
+        for coupon in coupons:
+            f.write(f"{coupon}\n")
 
 
 if __name__ == "__main__":

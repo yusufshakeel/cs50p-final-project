@@ -1,5 +1,5 @@
 import pytest
-from project import validate, generate
+from project import validate, generate, save
 
 
 def test_validate():
@@ -45,3 +45,11 @@ def test_generate_n_coupons_have_l_characters():
     assert len(coupons) == 3
     for coupon in coupons:
         assert coupon.isalnum() == True
+
+
+def test_save():
+    coupons = ["CS50X", "CS50P"]
+    save(coupons)
+    with open("coupons.txt", "r") as f:
+        for i, coupon in enumerate(f):
+            assert coupon.strip() == coupons[i]
