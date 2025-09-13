@@ -1,6 +1,7 @@
 import argparse
-from typing import List, Set
 import random
+import os
+from typing import List, Set
 
 MIN_NUMBER_OF_COUPONS = 1
 MAX_NUMBER_OF_COUPONS = 1000000
@@ -9,7 +10,11 @@ MIN_LENGTH_OF_COUPON = 4
 MAX_LENGTH_OF_COUPON = 16
 DEFAULT_LENGTH_OF_COUPON = 5
 CHARACTER_SET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+OUTPUT_DIR = "output"
 OUTPUT_FILENAME = "coupons.txt"
+OUTPUT_FILE_PATH = f"./{OUTPUT_DIR}/{OUTPUT_FILENAME}"
+
+os.makedirs(f"./{OUTPUT_DIR}", exist_ok=True)
 
 
 def main():
@@ -49,7 +54,9 @@ def main():
 
         if args.s:
             save(coupons)
-            print(f"💾 Saved {number_of_coupons:,} coupon(s) in file {OUTPUT_FILENAME}")
+            print(
+                f"💾 Saved {number_of_coupons:,} coupon(s) in file {OUTPUT_FILE_PATH}"
+            )
         else:
             for coupon in coupons:
                 print(coupon)
@@ -82,7 +89,7 @@ def generate(number_of_coupons: int, number_of_chars_in_a_coupon: int) -> Set[st
 
 
 def save(coupons: List[str]):
-    with open(f"./{OUTPUT_FILENAME}", "w") as f:
+    with open(OUTPUT_FILE_PATH, "w") as f:
         for coupon in coupons:
             f.write(f"{coupon}\n")
 
