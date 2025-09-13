@@ -37,5 +37,4 @@ python project.py -h
 
 #### Characters
 
-This program uses the following characters `A-Z` and `0-9` to generate
-coupons.
+This program uses the following characters `A-Z` and `0-9` to generate coupons.
