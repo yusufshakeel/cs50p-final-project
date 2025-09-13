@@ -68,3 +68,50 @@ This program uses the following characters `A-Z` and `0-9` to generate coupons.
   * Allowed File Extension: txt|csv
   * Example: coupons.txt
 
+#### Examples
+
+* Generate a single coupon and log on console
+```shell
+➜ python project.py
+VG440
+```
+
+* Generate 3 coupons
+```shell
+➜ python project.py -n 3
+GIAEA
+5FKU4
+Z50MX
+
+➜ python project.py --number_of_coupons 3
+E71UX
+6BN3Y
+6D74T
+```
+
+* Generate coupons of length 6
+```shell
+➜ python project.py -l 6
+RCX5IA
+
+➜ python project.py --length_of_coupon 6
+WWOE19
+```
+
+* Generate coupons with prefix "CS50"
+```shell
+➜ python project.py -p CS50
+CS50CHZ0B
+
+➜ python project.py --prefix CS50
+CS50JO4MG
+```
+
+* Save coupons in a file
+```shell
+➜ python project.py -s coupons.txt
+💾 Saved 1 coupon(s) in file ./output/coupons.txt
+
+➜ python project.py --save coupons.txt
+💾 Saved 1 coupon(s) in file ./output/coupons.txt
+```
