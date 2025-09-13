@@ -16,6 +16,8 @@ CHARACTER_SET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 OUTPUT_DIR = "output"
 OUTPUT_FILENAME = "coupons.txt"
 OUTPUT_FILE_PATH = f"./{OUTPUT_DIR}/{OUTPUT_FILENAME}"
+ALLOWED_CHARACTERS_FOR_FILENAME = "[a-zA-Z0-9-_]"
+ALLOWED_FILE_EXTENSION_FOR_FILENAME = "(txt|csv)"
 
 os.makedirs(f"./{OUTPUT_DIR}", exist_ok=True)
 
@@ -51,24 +53,29 @@ def main():
             "-s",
             "--save",
             dest="s",
-            action="store_true",
-            help=f"Save the coupons in file {OUTPUT_FILE_PATH}",
+            type=str,
+            default="",
+            help=f"Save the coupons in the provided filename. [Allowed filename characters: {ALLOWED_CHARACTERS_FOR_FILENAME}, File Extension: {ALLOWED_FILE_EXTENSION_FOR_FILENAME}]",
         )
         args = parser.parse_args()
 
         number_of_coupons = args.n
-        number_of_chars_in_a_coupon = args.l
+        length_of_coupon = args.l
         prefix = args.p
+        filename = args.s
 
-        validate(number_of_coupons, number_of_chars_in_a_coupon, prefix)
+        validate(number_of_coupons, length_of_coupon, prefix, filename)
 
-        coupons = generate(number_of_coupons, number_of_chars_in_a_coupon, prefix)
+        coupons = generate(number_of_coupons, length_of_coupon, prefix)
+
+        if len(filename):
+            filepath = f"./{OUTPUT_DIR}/{filename}"
+        else:
+            filepath = OUTPUT_FILE_PATH
 
         if args.s:
-            save(coupons)
-            print(
-                f"💾 Saved {number_of_coupons:,} coupon(s) in file {OUTPUT_FILE_PATH}"
-            )
+            save(coupons, filepath)
+            print(f"💾 Saved {number_of_coupons:,} coupon(s) in file {filepath}")
         else:
             for coupon in coupons:
                 print(coupon)
@@ -77,30 +84,41 @@ def main():
 
 
 def validate(
-    number_of_coupons: int, number_of_chars_in_a_coupon: int, prefix: str = ""
+    number_of_coupons: int,
+    length_of_coupon: int,
+    prefix: str = "",
+    filename: str = "",
 ) -> None:
     if number_of_coupons > MAX_NUMBER_OF_COUPONS:
         raise ValueError(f"n cannot be greater than {MAX_NUMBER_OF_COUPONS}")
     elif number_of_coupons < MIN_NUMBER_OF_COUPONS:
         raise ValueError(f"n cannot be less than {MIN_NUMBER_OF_COUPONS}")
 
-    if number_of_chars_in_a_coupon > MAX_LENGTH_OF_COUPON:
+    if length_of_coupon > MAX_LENGTH_OF_COUPON:
         raise ValueError(f"l cannot be greater than {MAX_LENGTH_OF_COUPON}")
-    elif number_of_chars_in_a_coupon < MIN_LENGTH_OF_COUPON:
+    elif length_of_coupon < MIN_LENGTH_OF_COUPON:
         raise ValueError(f"l cannot be less than {MIN_LENGTH_OF_COUPON}")
 
-    number_of_chars_in_a_prefix = len(prefix)
-    if number_of_chars_in_a_prefix:
-        if number_of_chars_in_a_prefix > MAX_LENGTH_OF_PREFIX:
+    length_of_prefix = len(prefix)
+    if length_of_prefix:
+        if length_of_prefix > MAX_LENGTH_OF_PREFIX:
             raise ValueError(
                 f"p cannot have more than {MAX_LENGTH_OF_PREFIX} character(s)"
             )
 
         pattern = f"^{ALLOWED_CHARACTERS_FOR_PREFIX}+$"
-        found = re.fullmatch(pattern, prefix)
+        found = re.search(pattern, prefix)
         if found is None:
             raise ValueError(
                 f"p must only use the following characters {ALLOWED_CHARACTERS_FOR_PREFIX}"
+            )
+
+    if len(filename):
+        pattern = f"^{ALLOWED_CHARACTERS_FOR_FILENAME}+\\.{ALLOWED_FILE_EXTENSION_FOR_FILENAME}$"
+        found = re.search(pattern, filename)
+        if found is None:
+            raise ValueError(
+                f"s must only use the following characters {ALLOWED_CHARACTERS_FOR_FILENAME} and file extension {ALLOWED_FILE_EXTENSION_FOR_FILENAME}"
             )
 
 
@@ -118,8 +136,8 @@ def generate(
     return coupons
 
 
-def save(coupons: List[str]):
-    with open(OUTPUT_FILE_PATH, "w") as f:
+def save(coupons: List[str], filepath: str = OUTPUT_FILE_PATH):
+    with open(filepath, "w") as f:
         for coupon in coupons:
             f.write(f"{coupon}\n")
 

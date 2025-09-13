@@ -5,6 +5,7 @@ from project import validate, generate, save
 def test_validate():
     assert validate(1, 5) == None
     assert validate(1, 5, "CS50") == None
+    assert validate(1, 5, "CS50", "output.txt") == None
 
 
 def test_validate_should_raise_ValueError_when_n_is_less_than_1():
@@ -47,6 +48,26 @@ def test_validate_should_raise_ValueError_when_p_has_invalid_characters():
         validate(5, 5, "abc!@#$")
 
     assert str(e.value) == "p must only use the following characters [A-Z0-9]"
+
+
+def test_validate_should_raise_ValueError_when_s_has_invalid_characters():
+    with pytest.raises(ValueError) as e:
+        validate(5, 5, "CS50", "hello$.txt")
+
+    assert (
+        str(e.value)
+        == "s must only use the following characters [a-zA-Z0-9-_] and file extension (txt|csv)"
+    )
+
+
+def test_validate_should_raise_ValueError_when_s_has_invalid_file_extension():
+    with pytest.raises(ValueError) as e:
+        validate(5, 5, "CS50", "hello.pdf")
+
+    assert (
+        str(e.value)
+        == "s must only use the following characters [a-zA-Z0-9-_] and file extension (txt|csv)"
+    )
 
 
 def test_generate():
