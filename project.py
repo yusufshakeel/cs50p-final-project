@@ -47,15 +47,14 @@ def main():
             dest="p",
             type=str,
             default="",
-            help=f"Prefix for the coupons",
+            help=f"Prefix for the coupons. [Example: CS50, Allowed Prefix Characters: {ALLOWED_CHARACTERS_FOR_PREFIX}]",
         )
         parser.add_argument(
             "-s",
             "--save",
             dest="s",
             type=str,
-            default="",
-            help=f"Save the coupons in the provided filename. [Allowed filename characters: {ALLOWED_CHARACTERS_FOR_FILENAME}, File Extension: {ALLOWED_FILE_EXTENSION_FOR_FILENAME}]",
+            help=f"Save the coupons in the provided filename. [Allowed Filename Characters: {ALLOWED_CHARACTERS_FOR_FILENAME}, File Extension: {ALLOWED_FILE_EXTENSION_FOR_FILENAME}]",
         )
         args = parser.parse_args()
 
