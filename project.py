@@ -1,4 +1,6 @@
 import argparse
+from typing import List
+import random
 
 MIN_NUMBER_OF_COUPONS = 1
 MAX_NUMBER_OF_COUPONS = 10000
@@ -32,14 +34,23 @@ def validate(number_of_coupons: int, number_of_chars_in_a_coupon: int) -> None:
         raise ValueError(f"n cannot be greater than {MAX_NUMBER_OF_COUPONS}")
     elif number_of_coupons < MIN_NUMBER_OF_COUPONS:
         raise ValueError(f"n cannot be less than {MIN_NUMBER_OF_COUPONS}")
-    
+
     if number_of_chars_in_a_coupon > MAX_NUMBER_OF_COUPON_CHARACTERS:
         raise ValueError(f"l cannot be greater than {MAX_NUMBER_OF_COUPON_CHARACTERS}")
     elif number_of_chars_in_a_coupon < MIN_NUMBER_OF_COUPON_CHARACTERS:
         raise ValueError(f"l cannot be less than {MIN_NUMBER_OF_COUPON_CHARACTERS}")
-    
 
-def generate(): ...
+
+def generate(number_of_coupons: int, number_of_chars_in_a_coupon: int) -> List[str]:
+    coupons: List[str] = []
+
+    for _ in range(number_of_coupons):
+        random_chars_for_coupon: List[str] = random.choices(
+            CHARACTER_SET, k=number_of_chars_in_a_coupon
+        )
+        coupons.append("".join(random_chars_for_coupon))
+
+    return coupons
 
 
 def save(): ...
