@@ -54,6 +54,7 @@ def main():
             "--save",
             dest="s",
             type=str,
+            default="",
             help=f"Save the coupons in the provided filename. [Allowed Filename Characters: {ALLOWED_CHARACTERS_FOR_FILENAME}, File Extension: {ALLOWED_FILE_EXTENSION_FOR_FILENAME}]",
         )
         args = parser.parse_args()
