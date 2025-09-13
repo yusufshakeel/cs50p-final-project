@@ -62,7 +62,7 @@ def main():
 
         validate(number_of_coupons, number_of_chars_in_a_coupon, prefix)
 
-        coupons = generate(number_of_coupons, number_of_chars_in_a_coupon)
+        coupons = generate(number_of_coupons, number_of_chars_in_a_coupon, prefix)
 
         if args.s:
             save(coupons)
@@ -104,14 +104,16 @@ def validate(
             )
 
 
-def generate(number_of_coupons: int, number_of_chars_in_a_coupon: int) -> Set[str]:
+def generate(
+    number_of_coupons: int, number_of_chars_in_a_coupon: int, prefix: str = ""
+) -> Set[str]:
     coupons: Set[str] = set()
 
     while len(coupons) < number_of_coupons:
         random_chars_for_coupon: List[str] = random.choices(
             CHARACTER_SET, k=number_of_chars_in_a_coupon
         )
-        coupons.add("".join(random_chars_for_coupon))
+        coupons.add(prefix + "".join(random_chars_for_coupon))
 
     return coupons
 

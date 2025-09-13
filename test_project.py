@@ -63,6 +63,15 @@ def test_generate_n_coupons_have_l_characters():
         assert coupon.isalnum() == True
 
 
+def test_generate_n_coupons_have_l_characters_with_prefix():
+    coupons = generate(3, 4, "CS50")
+    assert len(coupons) == 3
+    for coupon in coupons:
+        assert coupon.isalnum() == True
+        assert len(coupon) == 8
+        assert coupon[0:4] == "CS50"
+
+
 def test_save():
     coupons = ["CS50X", "CS50P"]
     save(coupons)
