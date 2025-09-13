@@ -27,6 +27,11 @@ def main():
             default=DEFAULT_NUMBER_OF_COUPON_CHARACTERS,
             help=f"Number of characters in a coupon. [Min: {MIN_NUMBER_OF_COUPON_CHARACTERS}, Max: {MAX_NUMBER_OF_COUPON_CHARACTERS}, Default: {DEFAULT_NUMBER_OF_COUPON_CHARACTERS}]",
         )
+        parser.add_argument(
+            "--save",
+            action="store_true",
+            help=f"Save the coupons in file {OUTPUT_FILENAME}",
+        )
         args = parser.parse_args()
 
         number_of_coupons = args.n
@@ -36,9 +41,12 @@ def main():
 
         coupons = generate(number_of_coupons, number_of_chars_in_a_coupon)
 
-        save(coupons)
-
-        print(f"💾 Saved {number_of_coupons} coupon(s) in file {OUTPUT_FILENAME}")
+        if args.save:
+            save(coupons)
+            print(f"💾 Saved {number_of_coupons} coupon(s) in file {OUTPUT_FILENAME}")
+        else:
+            for coupon in coupons:
+                print(coupon)
     except Exception as e:
         print(e)
 
