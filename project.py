@@ -41,7 +41,7 @@ def main():
             "--save",
             dest="s",
             action="store_true",
-            help=f"Save the coupons in file {OUTPUT_FILENAME}",
+            help=f"Save the coupons in file {OUTPUT_FILE_PATH}",
         )
         args = parser.parse_args()
 
