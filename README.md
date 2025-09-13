@@ -38,3 +38,20 @@ python project.py -h
 #### Characters
 
 This program uses the following characters `A-Z` and `0-9` to generate coupons.
+
+#### Options
+
+* -n N, --number_of_coupons N
+```
+Number of coupons to generate. [Min: 1, Max: 1000000, Default: 1]
+```
+
+* -l L, --length_of_coupon L
+```
+Length of coupon. [Min: 4, Max: 16, Default: 5]
+```
+
+* -s, --save
+```
+Save the coupons in file ./output/coupons.txt
+```
