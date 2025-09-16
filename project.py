@@ -3,6 +3,8 @@ import random
 import os
 import re
 from typing import List, Set
+from better_profanity import profanity
+
 
 MIN_NUMBER_OF_COUPONS = 1
 MAX_NUMBER_OF_COUPONS = 1000000
@@ -20,6 +22,7 @@ ALLOWED_CHARACTERS_FOR_FILENAME = "[a-zA-Z0-9-_]"
 ALLOWED_FILE_EXTENSION_FOR_FILENAME = "(txt|csv)"
 
 os.makedirs(f"./{OUTPUT_DIR}", exist_ok=True)
+profanity.load_censor_words()
 
 
 def main():
@@ -131,7 +134,9 @@ def generate(
         random_chars_for_coupon: List[str] = random.choices(
             CHARACTER_SET, k=number_of_chars_in_a_coupon
         )
-        coupons.add(prefix + "".join(random_chars_for_coupon))
+        generated_coupon = prefix + "".join(random_chars_for_coupon)
+        if not profanity.contains_profanity(generated_coupon):
+            coupons.add(generated_coupon)
 
     return coupons
 
