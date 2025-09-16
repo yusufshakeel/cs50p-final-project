@@ -8,6 +8,18 @@
 
 It can generate 1 million coupons per execution and it is configurable.
 
+#### Packages
+
+This project uses the following packages.
+
+| Name             | Purpose                              |
+| ---------------- | ------------------------------------ |
+| better-profanity | Check for profane words.             |
+| black            | Used for code formatting.            |
+| mypy             | For type checking.                   |
+| pre_commit       | Manage and run Git pre-commit hooks. |
+| pytest           | For testing.                         |
+
 #### Prerequisite
 
 * Python >= 3.11
