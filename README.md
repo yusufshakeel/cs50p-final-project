@@ -53,32 +53,32 @@ This program uses the following characters `A-Z` and `0-9` to generate coupons.
 
 #### Options
 
+##### Generate N coupons
 * -n N, --number_of_coupons N
-  * Number of coupons to generate.
-  * Optional: True
-  * Default: 1
-  * Min: 1
-  * Max: 1000000
+* Optional: True
+* Default: 1
+* Min: 1
+* Max: 1000000
 
+##### Generate coupon of length L
 * -l L, --length_of_coupon L
-  * Length of coupon.
-  * Optional: True
-  * Default: 5
-  * Min: 4
-  * Max: 16
+* Optional: True
+* Default: 5
+* Min: 4
+* Max: 16
 
+##### Generate coupons with a prefix
 * -p P, --prefix P
-  * Prefix for the coupons.
-  * Optional: True
-  * Allowed Prefix Characters: A-Z0-9
-  * Example: CS50
+* Optional: True
+* Allowed Prefix Characters: A-Z0-9
+* Example: CS50
 
+##### Save coupons in a file
 * -s S, --save S
-  * Save the coupons in the provided filename.
-  * Optional: True
-  * Allowed Filename Characters: a-zA-Z0-9-_
-  * Allowed File Extension: txt|csv
-  * Example: coupons.txt
+* Optional: True
+* Allowed Filename Characters: a-zA-Z0-9-_
+* Allowed File Extension: txt|csv
+* Example: coupons.txt
 
 #### Examples
 
