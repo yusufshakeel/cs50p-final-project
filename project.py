@@ -1,25 +1,24 @@
-import argparse
 import random
 import os
 import re
 from typing import List, Set
 from better_profanity import profanity
 
+from argparser import get_parser
+from constants import (
+    ALLOWED_CHARACTERS_FOR_FILENAME,
+    ALLOWED_CHARACTERS_FOR_PREFIX,
+    ALLOWED_FILE_EXTENSION_FOR_FILENAME,
+    CHARACTER_SET,
+    MAX_LENGTH_OF_COUPON,
+    MAX_LENGTH_OF_PREFIX,
+    MAX_NUMBER_OF_COUPONS,
+    MIN_LENGTH_OF_COUPON,
+    MIN_NUMBER_OF_COUPONS,
+    OUTPUT_DIR,
+    OUTPUT_FILE_PATH,
+)
 
-MIN_NUMBER_OF_COUPONS = 1
-MAX_NUMBER_OF_COUPONS = 1000000
-DEFAULT_NUMBER_OF_COUPONS = 1
-MIN_LENGTH_OF_COUPON = 4
-MAX_LENGTH_OF_COUPON = 16
-DEFAULT_LENGTH_OF_COUPON = 5
-MAX_LENGTH_OF_PREFIX = 16
-ALLOWED_CHARACTERS_FOR_PREFIX = "[A-Z0-9]"
-CHARACTER_SET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-OUTPUT_DIR = "output"
-OUTPUT_FILENAME = "coupons.txt"
-OUTPUT_FILE_PATH = f"./{OUTPUT_DIR}/{OUTPUT_FILENAME}"
-ALLOWED_CHARACTERS_FOR_FILENAME = "[a-zA-Z0-9-_]"
-ALLOWED_FILE_EXTENSION_FOR_FILENAME = "(txt|csv)"
 
 os.makedirs(f"./{OUTPUT_DIR}", exist_ok=True)
 profanity.load_censor_words()
@@ -27,39 +26,7 @@ profanity.load_censor_words()
 
 def main():
     try:
-        parser = argparse.ArgumentParser()
-        parser.add_argument(
-            "-n",
-            "--number_of_coupons",
-            dest="n",
-            type=int,
-            default=DEFAULT_NUMBER_OF_COUPONS,
-            help=f"Number of coupons to generate. [Min: {MIN_NUMBER_OF_COUPONS}, Max: {MAX_NUMBER_OF_COUPONS}, Default: {DEFAULT_NUMBER_OF_COUPONS}]",
-        )
-        parser.add_argument(
-            "-l",
-            "--length_of_coupon",
-            dest="l",
-            type=int,
-            default=DEFAULT_LENGTH_OF_COUPON,
-            help=f"Length of coupon. [Min: {MIN_LENGTH_OF_COUPON}, Max: {MAX_LENGTH_OF_COUPON}, Default: {DEFAULT_LENGTH_OF_COUPON}]",
-        )
-        parser.add_argument(
-            "-p",
-            "--prefix",
-            dest="p",
-            type=str,
-            default="",
-            help=f"Prefix for the coupons. [Example: CS50, Allowed Prefix Characters: {ALLOWED_CHARACTERS_FOR_PREFIX}]",
-        )
-        parser.add_argument(
-            "-s",
-            "--save",
-            dest="s",
-            type=str,
-            default="",
-            help=f"Save the coupons in the provided filename. [Allowed Filename Characters: {ALLOWED_CHARACTERS_FOR_FILENAME}, File Extension: {ALLOWED_FILE_EXTENSION_FOR_FILENAME}]",
-        )
+        parser = get_parser()
         args = parser.parse_args()
 
         number_of_coupons = args.n
