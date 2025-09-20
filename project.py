@@ -16,7 +16,6 @@ from constants import (
     MIN_LENGTH_OF_COUPON,
     MIN_NUMBER_OF_COUPONS,
     OUTPUT_DIR,
-    OUTPUT_FILE_PATH,
 )
 
 
@@ -38,12 +37,8 @@ def main():
 
         coupons = generate(number_of_coupons, length_of_coupon, prefix)
 
-        if len(filename):
+        if filename:
             filepath = f"./{OUTPUT_DIR}/{filename}"
-        else:
-            filepath = OUTPUT_FILE_PATH
-
-        if args.s:
             save(coupons, filepath)
             print(f"💾 Saved {number_of_coupons:,} coupon(s) in file {filepath}")
         else:
