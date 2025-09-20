@@ -4,7 +4,7 @@ import re
 from typing import List, Set
 from better_profanity import profanity
 
-from argparser import get_parser
+from argparser import ArgParser
 from constants import (
     ALLOWED_CHARACTERS_FOR_FILENAME,
     ALLOWED_CHARACTERS_FOR_PREFIX,
@@ -26,13 +26,13 @@ profanity.load_censor_words()
 
 def main():
     try:
-        parser = get_parser()
+        parser = ArgParser()
         args = parser.parse_args()
 
-        number_of_coupons = args.n
-        length_of_coupon = args.l
-        prefix = args.p
-        filename = args.s
+        number_of_coupons = args["number_of_coupons"]
+        length_of_coupon = args["length_of_coupon"]
+        prefix = args["prefix"]
+        filename = args["filename"]
 
         validate(number_of_coupons, length_of_coupon, prefix, filename)
 
