@@ -71,10 +71,18 @@ This program uses the following characters `A-Z` and `0-9` to generate coupons.
 * -p P, --prefix P
 * Optional: True
 * Allowed Prefix Characters: A-Z0-9
+* Max length: 16
 * Example: CS50
 
+##### Generate coupons with a suffix
+* -s S, --suffix S
+* Optional: True
+* Allowed Suffix Characters: A-Z0-9
+* Max length: 16
+* Example: 2025
+
 ##### Save coupons in a file
-* -s S, --save S
+* -f F, --file F
 * Optional: True
 * Allowed Filename Characters: a-zA-Z0-9-_
 * Allowed File Extension: txt|csv
@@ -82,7 +90,7 @@ This program uses the following characters `A-Z` and `0-9` to generate coupons.
 
 #### Examples
 
-* Generate a single coupon and log on console
+* Generate a coupon and log it to the console
 ```shell
 ➜ python project.py
 VG440
@@ -119,11 +127,20 @@ CS50CHZ0B
 CS50JO4MG
 ```
 
+* Generate coupons with suffix "2025"
+```shell
+➜ python project.py -s 2025
+1AZ0X2025
+
+➜ python project.py --suffix 2025
+Z13DA2025
+```
+
 * Save coupons in a file
 ```shell
-➜ python project.py -s coupons.txt
+➜ python project.py -f coupons.txt
 💾 Saved 1 coupon(s) in file ./output/coupons.txt
 
-➜ python project.py --save coupons.txt
+➜ python project.py --file coupons.txt
 💾 Saved 1 coupon(s) in file ./output/coupons.txt
 ```
